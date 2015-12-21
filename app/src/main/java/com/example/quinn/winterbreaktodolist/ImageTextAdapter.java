@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ class ImageTextAdapter extends ArrayAdapter<String> {
         theTextView.setText(task);
         ImageButton theImageButton = (ImageButton) theView.findViewById(R.id.taskComplete);
         theImageButton.setImageResource(R.drawable.check);
+        theImageButton.setTag(position);
         return theView;
     }
+
 }

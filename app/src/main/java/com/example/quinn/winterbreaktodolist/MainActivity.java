@@ -1,5 +1,8 @@
 package com.example.quinn.winterbreaktodolist;
 
+import android.annotation.TargetApi;
+import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,15 +14,19 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private List<String> taskList;
     private ArrayAdapter<String> listAdapter;
+    private int clickedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void completeTask(View view) {
-        taskList.remove()
+        int position = (Integer) view.getTag();
+        taskList.remove(position);
+        listAdapter.notifyDataSetChanged();
     }
 }
