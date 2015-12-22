@@ -1,6 +1,8 @@
 package com.example.quinn.winterbreaktodolist;
 
 import android.annotation.TargetApi;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> taskList;
     private ArrayAdapter<String> listAdapter;
     private int clickedPosition;
+    SQLiteDatabase toDoListDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
         listAdapter = new ImageTextAdapter(this, taskList);
         ListView toDoList = (ListView) findViewById(R.id.toDoList);
         toDoList.setAdapter(listAdapter);
+        createDB();
+        Cursor cursor = toDoListDB.rawQuery("SELECT * FROM list", null);
+        int taskColumn = cursor.getColumnIndex("task");
+        cursor.moveToFirst();
+        if(cursor != null && (cursor.getCount() > 0)) {
+            do{
+                String task = cursor.getString(taskColumn);
+                taskList.add(task);
+            }while(cursor.moveToNext());
+        }
     }
 
     @Override
@@ -61,15 +74,32 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //adds a task to the to do list and saves it to the database
     public void addTask(View view) {
         EditText newTask = (EditText) findViewById(R.id.addTaskText);
-        taskList.add(0, newTask.getText().toString());
+        String currentText = newTask.getText().toString();
+        taskList.add(0, currentText);
+        toDoListDB.execSQL("INSERT INTO list (task) VALUES ('" +
+            currentText + "');");
+        listAdapter.notifyDataSetChanged();
+        
+    }
+
+    //removes a task from the to do list and saves change in database
+    public void completeTask(View view) {
+        int position = (Integer) view.getTag();
+        String currentText = taskList.get(position);
+        taskList.remove(position);
+        toDoListDB.execSQL("DELETE FROM list WHERE task = '" +
+            currentText + "';");
         listAdapter.notifyDataSetChanged();
     }
 
-    public void completeTask(View view) {
-        int position = (Integer) view.getTag();
-        taskList.remove(position);
-        listAdapter.notifyDataSetChanged();
+    //creates database to store all tasks that will be remembered next time
+    //the application is opened
+    public void createDB() {
+        toDoListDB = openOrCreateDatabase("ToDoList", MODE_PRIVATE, null);
+        toDoListDB.execSQL("CREATE TABLE IF NOT EXISTS list " +
+                "(task VARCHAR);");
     }
 }
