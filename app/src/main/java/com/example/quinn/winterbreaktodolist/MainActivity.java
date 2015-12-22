@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         input.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        input.setCursorVisible(false);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
@@ -97,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         listAdapter.notifyDataSetChanged();
         EditText input = (EditText) findViewById(R.id.addTaskText);
         input.setText("");
-        input.setCursorVisible(false);
         //hideKeyboard(input);
     }
 
