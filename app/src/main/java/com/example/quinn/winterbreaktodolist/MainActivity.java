@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,9 +64,19 @@ public class MainActivity extends AppCompatActivity {
                 input.setCursorVisible(true);
             }
         });
-        input.setImeOptions(EditorInfo.IME_ACTION_DONE);
         input.setCursorVisible(false);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        input.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    input.setCursorVisible(false);
+                    hideKeyboard(v);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -123,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //method to make keyboard disappear upon button click
-    /*public void hideKeyboard(View view) {
+    public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }*/
+    }
 }
