@@ -1,6 +1,8 @@
 package com.example.quinn.winterbreaktodolist;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
@@ -13,12 +15,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 taskList.add(task);
             }while(cursor.moveToNext());
         }
+        final EditText input = (EditText) findViewById(R.id.addTaskText);
+        input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                input.setCursorVisible(true);
+            }
+        });
+        input.setImeOptions(EditorInfo.IME_ACTION_DONE);
     }
 
     @Override
@@ -80,9 +93,12 @@ public class MainActivity extends AppCompatActivity {
         String currentText = newTask.getText().toString();
         taskList.add(0, currentText);
         toDoListDB.execSQL("INSERT INTO list (task) VALUES ('" +
-            currentText + "');");
+                currentText + "');");
         listAdapter.notifyDataSetChanged();
-        
+        EditText input = (EditText) findViewById(R.id.addTaskText);
+        input.setText("");
+        input.setCursorVisible(false);
+        //hideKeyboard(input);
     }
 
     //removes a task from the to do list and saves change in database
@@ -91,8 +107,9 @@ public class MainActivity extends AppCompatActivity {
         String currentText = taskList.get(position);
         taskList.remove(position);
         toDoListDB.execSQL("DELETE FROM list WHERE task = '" +
-            currentText + "';");
+                currentText + "';");
         listAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "Task Complete!", Toast.LENGTH_LONG).show();
     }
 
     //creates database to store all tasks that will be remembered next time
@@ -102,4 +119,10 @@ public class MainActivity extends AppCompatActivity {
         toDoListDB.execSQL("CREATE TABLE IF NOT EXISTS list " +
                 "(task VARCHAR);");
     }
+
+    //method to make keyboard disappear upon button click
+    /*public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }*/
 }
