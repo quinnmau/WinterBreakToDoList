@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> taskList;
     private ArrayAdapter<String> listAdapter;
     private int clickedPosition;
-    SQLiteDatabase toDoListDB;
+    public static SQLiteDatabase toDoListDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,16 +108,6 @@ public class MainActivity extends AppCompatActivity {
         Intent addNewTask = new Intent(this, AddTask.class);
         final int result = 1;
         startActivityForResult(addNewTask, result);
-
-        /*EditText newTask = (EditText) findViewById(R.id.addTaskText);
-        String currentText = newTask.getText().toString();
-        taskList.add(0, currentText);
-        toDoListDB.execSQL("INSERT INTO list (task) VALUES ('" +
-                currentText + "');");
-        listAdapter.notifyDataSetChanged();
-        EditText input = (EditText) findViewById(R.id.addTaskText);
-        input.setText("");
-        */
     }
 
     //retrieve user input back from add task
