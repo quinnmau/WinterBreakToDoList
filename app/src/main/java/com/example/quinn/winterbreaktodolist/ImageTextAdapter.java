@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,9 +38,8 @@ class ImageTextAdapter extends ArrayAdapter<String>  {
                 getViewTask(v, theContext);
             }
         });
-        ImageButton theImageButton = (ImageButton) theView.findViewById(R.id.taskComplete);
-        theImageButton.setImageResource(R.drawable.check);
-        theImageButton.setTag(position);
+        Button theButton = (Button) theView.findViewById(R.id.taskComplete);
+        theButton.setTag(position);
         return theView;
     }
 

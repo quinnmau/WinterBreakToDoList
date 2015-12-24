@@ -35,6 +35,7 @@ public class ViewTask extends Activity {
         dueView.append(dayDue);
         TextView detailsView = (TextView) findViewById(R.id.details_text_view);
         detailsView.append(details);
+        cursor.close();
     }
 
 

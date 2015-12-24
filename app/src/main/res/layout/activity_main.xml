@@ -9,14 +9,6 @@
     android:orientation="vertical"
     tools:context="com.example.quinn.winterbreaktodolist.MainActivity">
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Add a task"
-        android:id="@+id/addTaskText"
-        android:imeOptions="actionDone"
-        android:singleLine="true" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -59,26 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 taskList.add(task);
             }while(cursor.moveToNext());
         }
-        final EditText input = (EditText) findViewById(R.id.addTaskText);
-        input.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                input.setCursorVisible(true);
-            }
-        });
-        input.setCursorVisible(false);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        input.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    input.setCursorVisible(false);
-                    hideKeyboard(v);
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -122,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         listAdapter.notifyDataSetChanged();
         toDoListDB.execSQL("INSERT INTO list2 (task, due, priority, details) VALUES ('" +
             putIn + "', '" + putIn2 + "', '" + putIn3 + "', '" + putIn4 + "');");
-        Toast.makeText(MainActivity.this, putIn + " " + putIn2, Toast.LENGTH_SHORT).show();
-
     }
 
     //removes a task from the to do list and saves change in database

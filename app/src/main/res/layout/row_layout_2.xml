@@ -6,17 +6,20 @@
     tools:context="com.example.quinn.winterbreaktodolist.MainActivity"
     >
 
-    <ImageButton
-        android:layout_width="50dp"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:id="@+id/taskComplete"
-        android:src="@drawable/check"
-        android:onClick="completeTask" />
+        android:text="Done"
+        android:onClick="completeTask"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/aTask"
-        android:textSize="15sp" />
+        android:textSize="23sp"
+        android:paddingTop="5dp"/>
 
 </LinearLayout>
