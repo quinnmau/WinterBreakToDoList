@@ -9,34 +9,48 @@
         android:layout_height="wrap_content"
         android:hint="Task"
         android:id="@+id/inputTask"
-        android:paddingTop="30dp"/>
+        android:paddingTop="30dp"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Priority"
         android:id="@+id/inputPriority"
-        android:paddingTop="30dp"/>
+        android:paddingTop="30dp"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Due By"
         android:id="@+id/inputDate"
-        android:paddingTop="30dp"/>
+        android:paddingTop="30dp"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Details"
         android:paddingTop="30dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:hint="Details"
-        android:id="@+id/inputDetails" />
+        android:layout_height="200dp"
+        android:id="@+id/inputDetails"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:onClick="goBack"/>
 
 
 </LinearLayout>

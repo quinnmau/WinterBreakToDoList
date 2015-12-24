@@ -22,6 +22,10 @@
         <activity android:name=".ViewTask"
             android:label="View task"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".AddTask"
+            android:label="Add task"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

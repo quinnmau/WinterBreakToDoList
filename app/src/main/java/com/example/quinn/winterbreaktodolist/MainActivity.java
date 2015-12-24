@@ -105,7 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
     //adds a task to the to do list and saves it to the database
     public void addTask(View view) {
-        EditText newTask = (EditText) findViewById(R.id.addTaskText);
+        Intent addNewTask = new Intent(this, AddTask.class);
+        final int result = 1;
+        startActivityForResult(addNewTask, result);
+
+        /*EditText newTask = (EditText) findViewById(R.id.addTaskText);
         String currentText = newTask.getText().toString();
         taskList.add(0, currentText);
         toDoListDB.execSQL("INSERT INTO list (task) VALUES ('" +
@@ -113,7 +117,23 @@ public class MainActivity extends AppCompatActivity {
         listAdapter.notifyDataSetChanged();
         EditText input = (EditText) findViewById(R.id.addTaskText);
         input.setText("");
-        //hideKeyboard(input);
+        */
+    }
+
+    //retrieve user input back from view task
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String putIn = data.getStringExtra("task");
+        String putIn2 = data.getStringExtra("date");
+        String putIn3 = data.getStringExtra("priority");
+        String putIn4 = data.getStringExtra("details");
+        taskList.add(0, putIn);
+        listAdapter.notifyDataSetChanged();
+        //toDoListDB.execSQL("INSERT INTO list (task, due, priority, details) VALUES ('" +
+            //putIn + "', '" + putIn2 + "', '" + putIn3 + "', '" + putIn4 + "');");
+        Toast.makeText(MainActivity.this, putIn + " " + putIn2, Toast.LENGTH_SHORT).show();
+
     }
 
     //removes a task from the to do list and saves change in database
@@ -132,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     public void createDB() {
         toDoListDB = openOrCreateDatabase("ToDoList", MODE_PRIVATE, null);
         toDoListDB.execSQL("CREATE TABLE IF NOT EXISTS list " +
-                "(task VARCHAR);");
+                "(task VARCHAR, due VARCHAR, priority VARCHAR, details VARCHAR);");
     }
 
     //method to make keyboard disappear upon button click

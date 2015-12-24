@@ -34,7 +34,6 @@ class ImageTextAdapter extends ArrayAdapter<String>  {
         theView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "you clicked the " + position + " index", Toast.LENGTH_SHORT).show();
                 getViewTask(v, theContext);
             }
         });
@@ -46,8 +45,9 @@ class ImageTextAdapter extends ArrayAdapter<String>  {
 
     public void getViewTask(View view, Context context) {
         Intent viewTask = new Intent(theContext, ViewTask.class);
+        TextView currentString = (TextView) view.findViewById(R.id.aTask);
         final int result = 1;
-        viewTask.putExtra("clickedTask", "go to walmart");
+        viewTask.putExtra("clickedTask", currentString.getText().toString());
         theContext.startActivity(viewTask);
     }
 

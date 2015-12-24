@@ -18,7 +18,8 @@ public class ViewTask extends Activity {
         Intent passedString = getIntent();
         String taskFiller = passedString.getExtras().getString("clickedTask");
         TextView task = (TextView) findViewById(R.id.task_text_view);
-        task.setText(taskFiller);
+        task.append(taskFiller);
+        //append priority, due date etc.
     }
 
 
