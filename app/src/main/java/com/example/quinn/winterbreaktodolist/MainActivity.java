@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ListView toDoList = (ListView) findViewById(R.id.toDoList);
         toDoList.setAdapter(listAdapter);
         createDB();
-        Cursor cursor = toDoListDB.rawQuery("SELECT * FROM list", null);
+        Cursor cursor = toDoListDB.rawQuery("SELECT * FROM list2", null);
         int taskColumn = cursor.getColumnIndex("task");
         cursor.moveToFirst();
         if(cursor != null && (cursor.getCount() > 0)) {
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    //retrieve user input back from view task
+    //retrieve user input back from add task
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
         String putIn4 = data.getStringExtra("details");
         taskList.add(0, putIn);
         listAdapter.notifyDataSetChanged();
-        //toDoListDB.execSQL("INSERT INTO list (task, due, priority, details) VALUES ('" +
-            //putIn + "', '" + putIn2 + "', '" + putIn3 + "', '" + putIn4 + "');");
+        toDoListDB.execSQL("INSERT INTO list2 (task, due, priority, details) VALUES ('" +
+            putIn + "', '" + putIn2 + "', '" + putIn3 + "', '" + putIn4 + "');");
         Toast.makeText(MainActivity.this, putIn + " " + putIn2, Toast.LENGTH_SHORT).show();
 
     }
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         int position = (Integer) view.getTag();
         String currentText = taskList.get(position);
         taskList.remove(position);
-        toDoListDB.execSQL("DELETE FROM list WHERE task = '" +
+        toDoListDB.execSQL("DELETE FROM list2 WHERE task = '" +
                 currentText + "';");
         listAdapter.notifyDataSetChanged();
         Toast.makeText(this, "Task Complete!", Toast.LENGTH_LONG).show();
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     //the application is opened
     public void createDB() {
         toDoListDB = openOrCreateDatabase("ToDoList", MODE_PRIVATE, null);
-        toDoListDB.execSQL("CREATE TABLE IF NOT EXISTS list " +
+        toDoListDB.execSQL("CREATE TABLE IF NOT EXISTS list2 " +
                 "(task VARCHAR, due VARCHAR, priority VARCHAR, details VARCHAR);");
     }
 

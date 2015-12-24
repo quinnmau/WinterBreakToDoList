@@ -19,7 +19,7 @@ public class ViewTask extends Activity {
         String taskFiller = passedString.getExtras().getString("clickedTask");
         TextView task = (TextView) findViewById(R.id.task_text_view);
         task.append(taskFiller);
-        //append priority, due date etc.
+        TextView priorityView = (TextView) findViewById(R.id.priority_text_view);
     }
 
 
