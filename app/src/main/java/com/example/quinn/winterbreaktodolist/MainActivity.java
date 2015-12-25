@@ -94,14 +94,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String putIn = data.getStringExtra("task");
-        String putIn2 = data.getStringExtra("date");
-        String putIn3 = data.getStringExtra("priority");
-        String putIn4 = data.getStringExtra("details");
-        taskList.add(0, putIn);
-        listAdapter.notifyDataSetChanged();
-        toDoListDB.execSQL("INSERT INTO list2 (task, due, priority, details) VALUES ('" +
-            putIn + "', '" + putIn2 + "', '" + putIn3 + "', '" + putIn4 + "');");
+        if (resultCode != RESULT_CANCELED) {
+            String putIn = data.getStringExtra("task");
+            String putIn2 = data.getStringExtra("date");
+            String putIn3 = data.getStringExtra("priority");
+            String putIn4 = data.getStringExtra("details");
+            taskList.add(0, putIn);
+            listAdapter.notifyDataSetChanged();
+            toDoListDB.execSQL("INSERT INTO list2 (task, due, priority, details) VALUES ('" +
+                    putIn + "', '" + putIn2 + "', '" + putIn3 + "', '" + putIn4 + "');");
+        }
     }
 
     //removes a task from the to do list and saves change in database

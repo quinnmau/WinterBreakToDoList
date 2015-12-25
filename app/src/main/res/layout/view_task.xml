@@ -41,9 +41,11 @@
         android:id="@+id/details_text_view"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="OK"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_gravity="center"
         android:onClick="goBack"/>
 

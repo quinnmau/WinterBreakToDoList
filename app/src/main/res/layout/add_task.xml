@@ -11,7 +11,8 @@
         android:textSize="30sp"
         android:textAlignment="center"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp" />
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -51,15 +52,33 @@
 
     <EditText
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:id="@+id/inputDetails"
         android:imeOptions="actionDone"
         android:singleLine="true"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:onClick="goBack"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:text="Cancel"
+            android:onClick="cancel"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:text="OK"
+            android:onClick="goBack"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -35,4 +35,10 @@ public class AddTask extends Activity{
         setResult(RESULT_OK, goingBack);
         finish();
     }
+
+    public void cancel(View view) {
+        Intent goingBack = new Intent();
+        setResult(MainActivity.RESULT_CANCELED, goingBack);
+        finish();
+    }
 }
